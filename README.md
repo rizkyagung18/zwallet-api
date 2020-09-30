@@ -8,6 +8,6 @@ RESTful API zwallet built with Express JS and MySQL
 - MySQL
 ______________________________________________________________________________________
 ## How to use
-...
-npm install
-...
+```
+$ npm install
+```
