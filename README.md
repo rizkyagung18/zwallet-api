@@ -14,3 +14,6 @@ $ npm install
 ```
 $ npm start or yarn start
 ```
+_______________________________________________________________________________________
+## Docs API
+https://documenter.getpostman.com/view/11198446/TVKJyupq
