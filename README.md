@@ -54,16 +54,11 @@ Transfer
 ```
 Topup
 ```
-+-------------+--------------+------+-----+---------------------+----------------+
-| Field       | Type         | Null | Key | Default             | Extra          |
-+-------------+--------------+------+-----+---------------------+----------------+
-| id          | int(11)      | NO   | PRI | NULL                | auto_increment |
-| amount      | int(11)      | NO   |     | NULL                |                |
-| date        | timestamp    | NO   |     | current_timestamp() |                |
-| note        | varchar(255) | NO   |     | NULL                |                |
-| id_sender   | int(11)      | NO   |     | NULL                |                |
-| receiver    | varchar(255) | NO   |     | NULL                |                |
-| id_receiver | int(11)      | NO   |     | NULL                |                |
-| createdAt   | timestamp    | NO   |     | current_timestamp() |                |
-+-------------+--------------+------+-----+---------------------+----------------+
++-----------+--------------+------+-----+---------------------+-------------------------------+
+| Field     | Type         | Null | Key | Default             | Extra                         |
++-----------+--------------+------+-----+---------------------+-------------------------------+
+| sequence  | int(11)      | NO   |     | NULL                |                               |
+| title     | varchar(255) | NO   |     | NULL                |                               |
+| updatedAt | timestamp    | NO   |     | current_timestamp() | on update current_timestamp() |
++-----------+--------------+------+-----+---------------------+-------------------------------+
 ```
