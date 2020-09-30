@@ -107,6 +107,12 @@ module.exports = {
     },
     editUser: async function(req, res) {
         try {
+            if(req.body.email) {
+                const errors = myValidationResult(req).array()
+                if(errors.length == 0) {
+                    res.send('You should use a valid email')
+                }
+            }
             const { id } = req.params
             let setData = req.body
             if(req.body.password) {

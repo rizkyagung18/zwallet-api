@@ -9,7 +9,10 @@ router
         body('email', 'Must a valid email').isEmail()
         ]
         , userController.postUser)
-    .patch('/:id', userController.editUser)
+    .patch('/:id', [
+        body('email', 'Must a valid email').isEmail()
+        ]
+        , userController.editUser)
     .delete('/:id', userController.deleteUser)
 
 module.exports = router
