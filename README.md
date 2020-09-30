@@ -1,4 +1,4 @@
-# <a href="z-wallet-rizky.netlify.app" align="center">Zwallet API</a>
+# <a href="https://z-wallet-rizky.netlify.app" align="center">Zwallet API</a>
 
 RESTful API zwallet built with Express JS and MySQL
 
