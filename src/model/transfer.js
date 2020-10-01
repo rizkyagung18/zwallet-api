@@ -55,7 +55,7 @@ module.exports = {
     },
     editTransfer: function(id, setData) {
         return new Promise((resolve, reject) => {
-            db.query(`UPDATE users SET ? WHERE id=?`, [setData, id], (err, result) => {
+            db.query(`UPDATE transfer SET ? WHERE id=?`, [setData, id], (err, result) => {
                 if(!err) {
                     resolve(result)
                 } else {
