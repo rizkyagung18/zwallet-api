@@ -109,7 +109,7 @@ module.exports = {
         try {
             if(req.body.email) {
                 const errors = myValidationResult(req).array()
-                if(errors.length == 0) {
+                if(errors.length) {
                     res.send('You should use a valid email')
                 }
             }
