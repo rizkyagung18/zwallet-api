@@ -154,14 +154,14 @@ module.exports = {
                     res.send('You should use a valid email')
                 }
             }
-            const currentPassword = req.query.password
             const { id } = req.params
             let setData = req.body
             if(req.body.password) {
-                const res = await userModel.getUserById(id)
-                const currPassword = res[0].password
-                const check = bcrypt.compareSync(currentPassword, currPassword)
-                console.log(check)
+                const hash = bcrypt.hashSync(req.body.password, 6)
+                setData = {
+                    ...req.body,
+                    password: hash
+                }
             } 
             const result = await userModel.editUser(id, setData)
             res.status(201).send({
