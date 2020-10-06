@@ -3,11 +3,13 @@ const transferModel = require('../model/transfer')
 module.exports = {
     search: async function(req, res) {
         try {
+            const { id } = req.params
             const { q } = req.query
-            const result = await transferModel.search(q)
+            const result = await transferModel.search(id, q)
             if(result.length == 0) {
-                res.status(404).send({
-                    message: 'Data Not Found'
+                res.send({
+                    message: 'Data Not Found',
+                    data: []
                 })
             } else {
                 res.status(200).send({
@@ -60,7 +62,7 @@ module.exports = {
             const result = await transferModel.postTransfer(id, setData)
             res.status(201).send({
                 message: 'Success created a transfer',
-                data: result.affectedRows
+                data: result
             })
         } catch (error) {
             res.status(500).send({

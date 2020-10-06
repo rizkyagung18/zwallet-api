@@ -1,9 +1,10 @@
 const db = require('../config/mysql')
+const user = require('./user')
 
 module.exports = {
-    search: function(q) {
+    search: function(id, q) {
         return new Promise((resolve, reject) => {
-            db.query(`SELECT id AS user_id, name, phone, photo FROM users WHERE name LIKE '${q}%' ORDER BY name ASC`, (err, result) => {
+            db.query(`SELECT id AS user_id, name, phone, photo, balance FROM users WHERE name LIKE '${q}%' AND id <> ${id} ORDER BY name ASC`, (err, result) => {
                 if(!err) {
                     resolve(result)
                 } else {
@@ -44,7 +45,7 @@ module.exports = {
                     }
                     db.query(`INSERT INTO transfer SET ?`, newData, (err, result) => {
                         if(!err) {
-                            resolve(result)
+                           resolve(result)
                         } else {
                             reject(new Error(err))
                         }

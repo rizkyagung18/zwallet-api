@@ -11,6 +11,21 @@ const myValidationResult = validationResult.withDefaults({
 })
 
 module.exports = {
+    login: async function(req, res) {
+        try {
+            const { email } = req.query
+            const result = await userModel.login(email)
+            if(result) {
+                res.status(200).send({
+                    data: result
+                })
+            }
+        } catch (error) {
+            res.status(500).send({
+                message: error.message
+            })
+        }
+    },
     getAllUser: async function(req, res) {
         try {
             const result = await userModel.getAllUser()
@@ -28,7 +43,7 @@ module.exports = {
                     return {
                         ...data,
                         firstName,
-                        lastName: ''
+                        lastName: ' '
                     }
                 }
             })
@@ -37,6 +52,32 @@ module.exports = {
                 data : newData
             })
         } catch(error) {
+            res.status(500).send({
+                message: error.message
+            })
+        }
+    },
+    searchAll: async function(req, res) {
+        try {
+            const { id } = req.params
+            const result = await userModel.searchAll(id)
+            res.status(200).send({
+                data: result
+            })
+        } catch (error) {
+            res.status(500).send({
+                message: error.message
+            })
+        }
+    },
+    searchOneById: async function(req, res) {
+        try {
+            const { id } = req.params
+            const result = await userModel.searchOneById(id)
+            res.status(200).send({
+                data: result
+            })
+        } catch (error) {
             res.status(500).send({
                 message: error.message
             })
@@ -65,7 +106,7 @@ module.exports = {
                         return {
                             ...data,
                             firstName,
-                            lastName: ''
+                            lastName: ' '
                         }
                     }
                 })
@@ -113,15 +154,15 @@ module.exports = {
                     res.send('You should use a valid email')
                 }
             }
+            const currentPassword = req.query.password
             const { id } = req.params
             let setData = req.body
             if(req.body.password) {
-                const hash = bcrypt.hashSync(req.body.password, 10)
-                setData = {
-                    ...req.body,
-                    password: hash
-                }
-            }
+                const res = await userModel.getUserById(id)
+                const currPassword = res[0].password
+                const check = bcrypt.compareSync(currentPassword, currPassword)
+                console.log(check)
+            } 
             const result = await userModel.editUser(id, setData)
             res.status(201).send({
                 message: 'Success edited an user',
