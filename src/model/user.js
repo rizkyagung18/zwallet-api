@@ -49,7 +49,7 @@ module.exports = {
         return new Promise((resolve, reject) => {
             db.query(`SELECT * FROM users WHERE id=${id}`, (err, result) => {
                 if(!err) {
-                    db.query(`SELECT * FROM transfer WHERE id_sender = ${id}`, (err, res) => {
+                    db.query(`SELECT * FROM transfer WHERE id_sender = ${id} OR id_receiver = ${id}`, (err, res) => {
                         const newData = [
                             {
                                 ...result[0],
